@@ -10,6 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var lightUpButtton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -21,9 +22,13 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func lightUpAction(_ sender: Any) {
+        
+    }
+    
     func lightUpAnimation() {
         let emitter = CAEmitterLayer()
-        emitter.emitterPosition = CGPoint(x: view.bounds.width * 0.5, y: view.bounds.height - 20)
+        emitter.emitterPosition = CGPoint(x: lightUpButtton.center.x, y: lightUpButtton.center.y - 30)
         emitter.preservesDepth = true
         let emitterCell = CAEmitterCell()
         emitterCell.velocity = 150
@@ -33,9 +38,11 @@ class ViewController: UIViewController {
         emitterCell.emissionRange = CGFloat(Double.pi/4)
         emitterCell.emissionLongitude = CGFloat(-Double.pi/2)
         emitterCell.emissionLatitude = CGFloat(Double.pi/4)
-        emitterCell.lifetime = 3
-        emitterCell.lifetimeRange = 1.5
-        emitterCell.birthRate = 10
+        emitterCell.alphaRange = 0.1
+        emitterCell.alphaSpeed = -1.0
+        emitterCell.lifetime = 1.5
+        emitterCell.lifetimeRange = 1
+        emitterCell.birthRate = 5
         emitterCell.contents = UIImage(named: "2")?.cgImage
         emitter.emitterCells = [emitterCell]
         view.layer.addSublayer(emitter)
